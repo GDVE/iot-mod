@@ -20,9 +20,6 @@ public class DataSourceConfig extends GsonConfig {
 
     public DataSourceConfig(Path path) {
         super(path);
-        hibernateProperties.put("hibernate.enhancer.enableDirtyTracking", "false");
-        hibernateProperties.put("hibernate.enhancer.enableLazyInitialization", "false");
-        hibernateProperties.put("hibernate.enhancer.enableAssociationManagement", "false");
         hibernateProperties.put("hibernate.show_sql", "false");
         hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.put("hibernate.transaction.jta.platform", "org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform");

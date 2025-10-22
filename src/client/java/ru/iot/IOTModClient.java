@@ -9,10 +9,12 @@ public class IOTModClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        /* Для тестов
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.screen instanceof PauseScreen) {
                 client.setScreen(new MessageScreen());
             }
         });
+         */
     }
 }

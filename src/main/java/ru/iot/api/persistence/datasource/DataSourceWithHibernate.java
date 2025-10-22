@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.Properties;
 
 @Getter
-public abstract class DataSourceHibernateImpl implements DataSource {
+public abstract class DataSourceWithHibernate implements DataSource {
 
     private final HikariDataSource dataSource;
     private final EntityManagerFactory entityManagerFactory;
     private final Properties hibernateProperties;
 
-    public DataSourceHibernateImpl(DataSourceConfig config) {
+    public DataSourceWithHibernate(DataSourceConfig config) {
         dataSource = buildDataSource(config);
         hibernateProperties = buildHibernateProperties(config);
         entityManagerFactory = buildEntityManagerFactory(config);

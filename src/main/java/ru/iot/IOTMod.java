@@ -16,6 +16,8 @@ public class IOTMod implements ModInitializer {
     private static @Getter IOTMod instance;
 
     private final Logger logger = LoggerFactory.getLogger(MOD_ID);
+
+    private IOTDataSource dataSource;
     private MessageRepo messageRepo;
 
     public IOTMod() {
@@ -27,6 +29,10 @@ public class IOTMod implements ModInitializer {
         MessagePacketPayload.register();
 
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
+            if (dataSource == null) {
+                dataSource = new IOTDataSource();
+            }
+
             if (messageRepo == null) {
                 messageRepo = new MessageRepo();
             }
