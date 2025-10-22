@@ -1,8 +1,8 @@
 package ru.iot;
 
 import ru.iot.api.persistence.RepositoryException;
-import ru.iot.api.persistence.datasource.DataSourceConfig;
-import ru.iot.api.persistence.datasource.DataSourceWithHibernate;
+import ru.iot.api.persistence.hibernate.HibernateDataSourceConfig;
+import ru.iot.api.persistence.hibernate.HibernateDataSource;
 import ru.iot.message.MessageEntity;
 
 import java.io.IOException;
@@ -10,15 +10,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class IOTDataSource extends DataSourceWithHibernate {
+public class IOTDataSource extends HibernateDataSource {
 
     public IOTDataSource() {
         super(initConfig());
     }
 
-    private static DataSourceConfig initConfig() {
+    private static HibernateDataSourceConfig initConfig() {
         Path path = Paths.get(System.getProperty("user.dir") + "/config/iot_datasource.json");
-        DataSourceConfig config = new DataSourceConfig(path);
+        HibernateDataSourceConfig config = new HibernateDataSourceConfig(path);
         try {
             config.readFromDisk();
         } catch (IOException e) {

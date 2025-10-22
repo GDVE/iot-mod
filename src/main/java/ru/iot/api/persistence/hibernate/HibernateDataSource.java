@@ -1,4 +1,4 @@
-package ru.iot.api.persistence.datasource;
+package ru.iot.api.persistence.hibernate;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -18,19 +18,19 @@ import java.util.List;
 import java.util.Properties;
 
 @Getter
-public abstract class DataSourceWithHibernate implements DataSource {
+public abstract class HibernateDataSource implements DataSource {
 
     private final HikariDataSource dataSource;
     private final EntityManagerFactory entityManagerFactory;
     private final Properties hibernateProperties;
 
-    public DataSourceWithHibernate(DataSourceConfig config) {
+    public HibernateDataSource(HibernateDataSourceConfig config) {
         dataSource = buildDataSource(config);
         hibernateProperties = buildHibernateProperties(config);
         entityManagerFactory = buildEntityManagerFactory(config);
     }
 
-    private HikariDataSource buildDataSource(DataSourceConfig config) {
+    private HikariDataSource buildDataSource(HibernateDataSourceConfig config) {
         var hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(config.getJdbcUrl());
         hikariConfig.setUsername(config.getUsername());
@@ -39,17 +39,23 @@ public abstract class DataSourceWithHibernate implements DataSource {
         return new HikariDataSource(hikariConfig);
     }
 
-    private Properties buildHibernateProperties(DataSourceConfig config) {
+    private Properties buildHibernateProperties(HibernateDataSourceConfig config) {
         var properties = new Properties();
         properties.putAll(config.getHibernateProperties());
         return properties;
     }
 
-    private EntityManagerFactory buildEntityManagerFactory(DataSourceConfig config) {
+    private EntityManagerFactory buildEntityManagerFactory(HibernateDataSourceConfig config) {
         return new EntityManagerFactoryBuilderImpl(
                 this,
                 config.getHibernateProperties()
         ).build();
+    }
+
+    @Override
+    public void close() {
+        DataSource.super.close();
+        dataSource.close();
     }
 
     @Override

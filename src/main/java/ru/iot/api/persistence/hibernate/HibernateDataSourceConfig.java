@@ -1,4 +1,4 @@
-package ru.iot.api.persistence.datasource;
+package ru.iot.api.persistence.hibernate;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class DataSourceConfig extends GsonConfig {
+public class HibernateDataSourceConfig extends GsonConfig {
 
     private String jdbcUrl = "jdbc:postgresql://localhost:5432/iotmod";
     private String username = "postgres";
@@ -18,7 +18,7 @@ public class DataSourceConfig extends GsonConfig {
     private int maxPoolSize = 10;
     private Map<String, Object> hibernateProperties = new HashMap<>();
 
-    public DataSourceConfig(Path path) {
+    public HibernateDataSourceConfig(Path path) {
         super(path);
         hibernateProperties.put("hibernate.show_sql", "false");
         hibernateProperties.put("hibernate.hbm2ddl.auto", "update");

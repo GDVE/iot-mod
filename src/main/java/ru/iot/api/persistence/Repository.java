@@ -20,8 +20,4 @@ public interface Repository<T> {
             }
         }
     }
-
-    default void close() {
-        getDataSource().close();
-    }
 }

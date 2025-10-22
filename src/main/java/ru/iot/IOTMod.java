@@ -39,8 +39,8 @@ public class IOTMod implements ModInitializer {
         });
 
         ServerLifecycleEvents.SERVER_STOPPING.register(server -> {
-            if (messageRepo != null) {
-                messageRepo.close();
+            if (dataSource != null) {
+                dataSource.close();
             }
         });
     }
