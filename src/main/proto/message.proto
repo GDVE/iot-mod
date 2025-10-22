@@ -1,0 +1,6 @@
+syntax = "proto3";
+package ru.iot.proto;
+
+message Message {
+  string text = 1;
+}
